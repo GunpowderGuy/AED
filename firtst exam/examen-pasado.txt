@@ -1,0 +1,30 @@
+5 
+
+numero de pasos de funcion ( para input tamanno n )  es menor igual 
+que 
+c X pasos simplifcados para tamanno n
+si n es suficientemente grande
+
+Pero O toma el caso, cuando el algorimto realiza el mayor numero de pasos posibles para las condiciones dadas ( si no hay espcificmas, solo sabes que el tamnno del input es n ) 
+sigma lo mejor, y thetha existe si hay una expresion que satificacen tanto O como sigma
+
+
+O toma un algoritmo ( o funcion , son equivalentes para este uso ) que toma input de tamanno n. Para el caso especifico ( aqui tomamamos el caso general, asi que puede ser cualquier input tamanno n ). 
+Cual es el peor numero pasos ( simplificado ) que puedes tomar
+sigma es lo mismo pero con mejor en vez de peor
+
+
+5. (2 pt) Sea un algoritmo A cuyo tiempo de ejecución depende de dos parámetros n y m. Un estudiante afirma lo siguiente: “El algoritmo A tiene un tiempo de ejecución al menos O(n2logn) y a lo más Ω(nm), por lo tanto su complejidad está acotada entre ambas expresiones.” (a) Explique detalladamente por qué esta afirmación es incorrecta desde el punto de vista de la notación asintótica. (b) Reformule correctamente la afirmación utilizando notaciones adecuadas (O, Ω, Θ) y justifique su respuesta.
+
+veamos la a solo por ahora
+
+O toma un algoritmo ( o funcion , son equivalentes para este uso ) que toma input de tamanno n. Para el caso especifico ( aqui tomamamos el caso general, asi que puede ser cualquier input tamanno n ). Cual es el peor numero pasos ( simplificado ) que puedes tomar
+
+sigma es lo mismo pero con mejor en vez de peor
+
+en el enunciado dices que sigma es lo peor, y O lo mejor. lo que no puede ser para este caso ( el general , mismo en ambos )
+
+
+(b) Reformule correctamente la afirmación utilizando notaciones adecuadas (O, Ω, Θ) y justifique su respuesta.
+
+“El algoritmo A tiene un tiempo de ejecución al menos SIGMA(n2logn) y a lo más O(nm), por lo tanto su complejidad está acotada entre ambas expresiones.” 
