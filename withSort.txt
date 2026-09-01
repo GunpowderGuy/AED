@@ -1,0 +1,411 @@
+#include <iostream>
+using namespace std;
+
+template<typename data_type>
+struct LinkedNode {
+    data_type data;
+    LinkedNode *next;
+
+    LinkedNode() {
+        next = nullptr;
+    }
+
+    LinkedNode(data_type data, LinkedNode<data_type> *next = nullptr) : data(data), next(next) {}
+};
+
+template<typename data_type>
+struct DoubleLinkedNode {
+    data_type data;
+    DoubleLinkedNode *next;
+    DoubleLinkedNode *prev;
+
+    DoubleLinkedNode() {
+        next = nullptr;
+        prev = nullptr;
+    }
+    DoubleLinkedNode(data_type data, DoubleLinkedNode<data_type> *next = nullptr, DoubleLinkedNode<data_type> *prev = nullptr) : data(data), next(next), prev(prev) {}
+};
+
+template<typename data_type>
+struct LinkedList {
+    LinkedNode<data_type> *head;
+    LinkedNode<data_type> *tail;
+
+    LinkedList() {
+        head = nullptr;
+        tail = nullptr;
+    }
+    void push_front(data_type data) {
+        LinkedNode<data_type> *new_node = new LinkedNode<data_type>(data, head);
+        if (head == nullptr) {
+            tail = new_node;
+        }
+        head = new_node;
+    }
+
+    void push_back(data_type data) {
+        if (tail == nullptr) {
+            head = tail = new LinkedNode<data_type>(data);
+        } else {
+            tail->next = new LinkedNode<data_type>(data);
+            tail = tail->next;
+        }
+    }
+    void insert(LinkedNode<data_type> *node, data_type data) {
+        LinkedNode<data_type> *new_node = new LinkedNode<data_type>(data, node->next);
+        if (node == tail) {
+            tail = new_node;
+        }
+        node->next = new_node;
+    }
+
+    void insert(int k, data_type data) {
+        if (k == 0) {
+            push_front(data);
+        }
+        else {
+            LinkedNode<data_type> *current = head;
+            for (int i = 0; i <= k - 1; ++i) {
+                current = current->next;
+            }
+            insert(current, data);
+        }
+    }
+
+    void pop_front() {
+        LinkedNode<data_type> *current = head;
+        head = head->next;
+        if (head == nullptr) {
+            tail = nullptr;
+        }
+        delete current;
+    }
+
+    void erase(LinkedNode<data_type> *node) {
+        if (node -> next) {
+            LinkedNode<data_type> *current = node->next;
+            if (node->next == tail) {
+                tail = node;
+            }
+            node -> next = node -> next -> next;
+            delete current;
+        }
+    }
+
+    void erase(int k) {
+        if (k == 0) {
+            pop_front();
+        }
+        else {
+            LinkedNode<data_type> *current = head;
+            for (int i = 0; i < k - 1; ++i) {
+                current = current->next;
+            }
+            erase(current);
+        }
+    }
+
+    void print() {
+        LinkedNode<data_type> *current = head;
+        while (current != nullptr) {
+            cout << current->data << " ";
+            current = current->next;
+        }
+        cout << endl;
+    }
+
+    // ==================== MERGE SORT FOR SINGLY LINKED LIST ====================
+
+private:
+    void split(LinkedNode<data_type>* source, LinkedNode<data_type>** front, LinkedNode<data_type>** back) {
+        LinkedNode<data_type>* slow = source;
+        LinkedNode<data_type>* fast = source->next;
+
+        while (fast != nullptr) {
+            fast = fast->next;
+            if (fast != nullptr) {
+                slow = slow->next;
+                fast = fast->next;
+            }
+        }
+
+        *front = source;
+        *back = slow->next;
+        slow->next = nullptr;
+    }
+
+    LinkedNode<data_type>* merge(LinkedNode<data_type>* a, LinkedNode<data_type>* b) {
+        if (a == nullptr) return b;
+        if (b == nullptr) return a;
+
+        LinkedNode<data_type>* result = nullptr;
+
+        if (a->data <= b->data) {
+            result = a;
+            result->next = merge(a->next, b);
+        } else {
+            result = b;
+            result->next = merge(a, b->next);
+        }
+        return result;
+    }
+
+    void merge_sort(LinkedNode<data_type>** node_ref) {
+        LinkedNode<data_type>* node = *node_ref;
+        if (node == nullptr || node->next == nullptr) return;
+
+        LinkedNode<data_type>* a;
+        LinkedNode<data_type>* b;
+        split(node, &a, &b);
+
+        merge_sort(&a);
+        merge_sort(&b);
+
+        *node_ref = merge(a, b);
+    }
+
+    void update_tail() {
+        if (head == nullptr) {
+            tail = nullptr;
+            return;
+        }
+        LinkedNode<data_type>* current = head;
+        while (current->next != nullptr) {
+            current = current->next;
+        }
+        tail = current;
+    }
+
+public:
+    void sort() {
+        if (head == nullptr || head->next == nullptr) return;
+        merge_sort(&head);
+        update_tail();
+    }
+};
+
+template<typename data_type>
+struct DoubleLinkedList {
+    DoubleLinkedNode<data_type> *head;
+    DoubleLinkedNode<data_type> *tail;
+    DoubleLinkedList() {
+        head = nullptr;
+        tail = nullptr;
+    }
+
+    void push_front(data_type data) {
+        DoubleLinkedNode<data_type> *new_node = new DoubleLinkedNode<data_type>(data, head);
+        if (head == nullptr) {
+            tail = new_node;
+        } else {
+            head->prev = new_node;
+        }
+        head = new_node;
+    }
+
+    void push_back(data_type data) {
+        if (tail == nullptr) {
+            head = tail = new DoubleLinkedNode<data_type>(data);
+        } else {
+            DoubleLinkedNode<data_type> *new_node = new DoubleLinkedNode<data_type>(data, nullptr, tail);
+            tail->next = new_node;
+            tail = new_node;
+        }
+    }
+
+    void insert(DoubleLinkedNode<data_type> *node, data_type data) {
+        DoubleLinkedNode<data_type> *new_node = new DoubleLinkedNode<data_type>(data, node->next, node);
+        if (node == tail) {
+            tail = new_node;
+        }
+        node->next = new_node;
+    }
+
+    void insert(int k, data_type data) {
+        if (k == 0) {
+            push_front(data);
+        }
+        else {
+            DoubleLinkedNode<data_type> *current = head;
+            for (int i = 0; i <= k - 1; ++i) {
+                current = current->next;
+            }
+            insert(current, data);
+        }
+    }
+
+    void print() {
+        DoubleLinkedNode<data_type> *current = head;
+        while (current != nullptr) {
+            cout << current->data << " ";
+            current = current->next;
+        }
+        cout << endl;
+    }
+
+    void erase(DoubleLinkedNode<data_type> *node) {
+        if (node == head) {
+            if (head == tail) {
+                delete node;
+                head = tail = nullptr;
+            }
+            else {
+                head = head->next;
+                head->prev = nullptr;
+                delete node;
+            }
+        } else if (node == tail) {
+            tail = node->prev;
+            tail->next = nullptr;
+            delete node;
+        } else {
+            DoubleLinkedNode<data_type> *predecesor = node->prev;
+            DoubleLinkedNode<data_type> *sucesor = node->next;
+            predecesor->next = node->next;
+            sucesor->prev = node->prev;
+            delete node;
+        }
+    }
+
+    void delete_first() {
+        DoubleLinkedNode<data_type> *current = head;
+        while (current != nullptr) {
+            if (current->data == head->data) {
+                erase(current);
+                break;
+            }
+            current = current->next;
+        }
+    }
+
+    void pop_front() {
+        DoubleLinkedNode<data_type> *current = head;
+        head = head->next;
+        if (head == nullptr) {
+            tail = nullptr;
+        } else {
+            head->prev = nullptr;
+        }
+        delete current;
+    }
+
+    void pop_back() {
+        DoubleLinkedNode<data_type> *current = tail;
+        tail = tail->prev;
+        if (tail == nullptr) {
+            head = nullptr;
+        } else {
+            tail->next = nullptr;
+        }
+        delete current;
+    }
+
+    // ==================== MERGE SORT FOR DOUBLY LINKED LIST ====================
+
+private:
+    void split(DoubleLinkedNode<data_type>* source, DoubleLinkedNode<data_type>** front, DoubleLinkedNode<data_type>** back) {
+        DoubleLinkedNode<data_type>* slow = source;
+        DoubleLinkedNode<data_type>* fast = source->next;
+
+        while (fast != nullptr) {
+            fast = fast->next;
+            if (fast != nullptr) {
+                slow = slow->next;
+                fast = fast->next;
+            }
+        }
+
+        *front = source;
+        *back = slow->next;
+        if (*back != nullptr) (*back)->prev = nullptr;
+        slow->next = nullptr;
+    }
+
+    DoubleLinkedNode<data_type>* merge(DoubleLinkedNode<data_type>* a, DoubleLinkedNode<data_type>* b) {
+        if (a == nullptr) return b;
+        if (b == nullptr) return a;
+
+        DoubleLinkedNode<data_type>* result = nullptr;
+
+        if (a->data <= b->data) {
+            result = a;
+            result->next = merge(a->next, b);
+            if (result->next) result->next->prev = result;
+        } else {
+            result = b;
+            result->next = merge(a, b->next);
+            if (result->next) result->next->prev = result;
+        }
+        return result;
+    }
+
+    void merge_sort(DoubleLinkedNode<data_type>** node_ref) {
+        DoubleLinkedNode<data_type>* node = *node_ref;
+        if (node == nullptr || node->next == nullptr) return;
+
+        DoubleLinkedNode<data_type>* a;
+        DoubleLinkedNode<data_type>* b;
+        split(node, &a, &b);
+
+        merge_sort(&a);
+        merge_sort(&b);
+
+        *node_ref = merge(a, b);
+        if (*node_ref) (*node_ref)->prev = nullptr;
+    }
+
+    void update_tail() {
+        if (head == nullptr) {
+            tail = nullptr;
+            return;
+        }
+        DoubleLinkedNode<data_type>* current = head;
+        while (current->next != nullptr) {
+            current = current->next;
+        }
+        tail = current;
+    }
+
+public:
+    void sort() {
+        if (head == nullptr || head->next == nullptr) return;
+        merge_sort(&head);
+        update_tail();
+    }
+};
+
+struct CircularLinkedList {
+
+};
+
+int main() {
+    // ---- Test Singly Linked List Sort ----
+    cout << "Singly Linked List:" << endl;
+    LinkedList<int> L1;
+    L1.push_back(5);
+    L1.push_back(1);
+    L1.push_back(9);
+    L1.push_back(3);
+    L1.push_back(7);
+    cout << "Before sort: ";
+    L1.print();
+    L1.sort();
+    cout << "After sort:  ";
+    L1.print();
+
+    // ---- Test Doubly Linked List Sort ----
+    cout << "\nDoubly Linked List:" << endl;
+    DoubleLinkedList<int> L2;
+    L2.push_back(5);
+    L2.push_back(1);
+    L2.push_back(9);
+    L2.push_back(3);
+    L2.push_back(7);
+    cout << "Before sort: ";
+    L2.print();
+    L2.sort();
+    cout << "After sort:  ";
+    L2.print();
+
+    return 0;
+}
