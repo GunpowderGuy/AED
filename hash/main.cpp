@@ -1,73 +1,11 @@
 #include <string>
 #include <vector>
 
-[[nodiscard]] bool is_balanced(const std::string& s) {
-    std::vector<char> st;
-    st.reserve(s.size());
-
-    for (char c : s) {
-        switch (c) {
-            case '(':
-            case '[':
-            case '{':
-                st.push_back(c);
-                break;
-
-            case ')':
-                if (st.empty() || st.back() != '(') return false;
-                st.pop_back();
-            break;
-            case ']':
-                if (st.empty() || st.back() != '[') return false;
-                st.pop_back();
-            break;
-            case '}':
-                if (st.empty() || st.back() != '{') return false;
-                st.pop_back();
-                break;
-
-            default:
-                return false;
-        }
-    }
-    return st.empty();
-}
-
-[[nodiscard]] std::string solve_one(const std::string& bracket_string) {
-    return is_balanced(bracket_string) ? "YES" : "NO";
-}
-
-[[nodiscard]] std::vector<std::string> solve_all(const std::vector<std::string>& inputs) {
-    std::vector<std::string> out;
-    out.reserve(inputs.size());
-    for (const auto& s : inputs) {
-        out.push_back(solve_one(s));
-    }
-    return out;
-}
-
 #include <iostream>
 
-int main2() {
-    std::ios::sync_with_stdio(false);
-    std::cin.tie(nullptr);
+#include <algorithm>
 
-    int n;
-    if (!(std::cin >> n)) return 0;
-
-    std::vector<std::string> inputs;
-    inputs.reserve(n);
-    for (int i = 0; i < n; ++i) {
-        std::string s;
-        std::cin >> s;
-        inputs.push_back(std::move(s));
-    }
-
-    for (const auto& ans : solve_all(inputs)) {
-        std::cout << ans << '\n';
-    }
-   return 0;
-}
+#include <sstream>
 
 
 using u64 = unsigned long long;
@@ -76,7 +14,7 @@ using i64 = long long;
 
 
 i64 contarRepeticiones(const std::vector<i64>& a, const i64 x) {
-    i64 n = a.size();
+    i64 n = a.size(); // paremetro a debe estar ordenado
 
     // primera posicion donde a[i] >= x
     int lo = 0, hi = n, first = n;
@@ -124,7 +62,7 @@ i64 contarRepeticiones(const std::vector<i64>& a, const i64 x) {
  }
  */
 
-#include <algorithm>
+
 
 std::vector<i64> contarQueries(std::vector<i64> a, const std::vector<i64>& queries) {
     std::ranges::sort(a); // C++23
@@ -139,8 +77,6 @@ std::vector<i64> contarQueries(std::vector<i64> a, const std::vector<i64>& queri
     return ans;
 }
 
-
-#include <sstream>
 
 std::string solve(const std::string& input) {
     std::istringstream in(input);
