@@ -1,0 +1,14 @@
+el examen de esta semana tendra prinicpialmente ejercicios de hashing. y conceptos de arbol binrario de busqueda ( 14 y 31 )
+
+Tipos de arbol binario
+
+lleno
+
+completo
+
+perfecto
+
+degenerado
+
+
+defincion arbol binario de busqueda
