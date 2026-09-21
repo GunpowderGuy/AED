@@ -1,0 +1,12 @@
+4 y 43: como representar un heap como un arreglo
+
+arbol completo , degenearado , lleno , perfecto ( mas informacion 4 y 47 )
+
+
+x solo estara relacionado con sus dos hijos, heap ( 14 y 50 ) ( 
+
+  https://www.geeksforgeeks.org/dsa/difference-between-binary-search-tree-and-binary-heap/
+
+3 y 04 : terminarias usando un arreglo para representar un puntero
+
+15 y 16 (tenganlo muy en cuenta ) 
