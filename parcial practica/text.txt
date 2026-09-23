@@ -1,0 +1,31 @@
+1. (4 points) General: Verdadero o falso
+Para cada afirmación a continuación, indique si es verdadera o falsa. Justifique su
+respuesta.
+1. (0.5 pts) En un árbol de búsqueda binaria (BST), el recorrido inorden siempre
+produce una lista de elementos ordenada en O(n) tiempo.
+
+
+2. (0.5 pts) Si dos elementos diferentes tienen el mismo valor de hash en una tabla
+hash, siempre se almacenarán en la misma posición.
+
+usuario verdadero
+
+
+3. (0.5 pts) En una tabla hash con una mala función de dispersión (hash function),
+todas las operaciones pueden degenerar en O(n) en el peor caso.
+
+
+usuario: correcto. digamos que la funcion de hash es detectar si el numero es par o impar. entonces el hash se degenera a tener basicamente la mitad de elementos en un slot y la otra mitad en el otro
+
+
+4. (0.5 pts) En un árbol de búsqueda binaria (BST), la inserción de un nuevo elemento
+siempre toma O(lg n) tiempo.
+
+toma o(n) si el arbol es degenerado. o( log(n) ) si es balanceado.
+
+5. (0.5 pts) Una lista simplemente enlazada permite realizar inserciones y eliminacio-
+nes en el medio de la lista en O(1), si se tiene acceso directo al nodo.
+
+usario : falso
+6:
+colisiones y eso
