@@ -1,0 +1,79 @@
+b) f (n) + g(n) = Θ(max(f (n), g(n))
+
+n.pow(2) + n.pow(3) = thetha(n.pow(3) ) 
+
+100 + 1000 = 2*1000                              
+( a partir de un numero de elementos n lo suficientemente grande, la notacion simplificadas theha, sigma y O seran mayor o igual que el numero de pasos preciso, si lo multiplicamos por una constante) 
+
+por eso b se cumple cuando f y g tengan thetha, si uno no tiene notacion thetha ( solo hay notaccion thetha cuando existe una notacion que satisfga tatno O como sigma ) 
+entonces b) no es satisfecho
+
+
+1. ¿Qué significa que f (n) = O(g(n))? Da la definición, indicando qué papel cumple la constante
+multiplicativa c y qué significa “para n suficientemente grande”. ¿Por qué se dice que O describe
+una cota superior?
+
+Significa que la funcion f n , para el caso dado, que como no tiene mas especficaciones, es el caso general. Para un numero de elementos input suficientemente grande. Tiene un costo simplificado que como mucho esta en funcion lineal al numero de elementos.
+
+. Para un n muy grande : significa que lo dicho se cumple para un n lo suficientemente grande. Por ejemplo para una funcion f1 puede ser 10. para una funcion f2 puede ser un quintillion. Pero a partir de algun numero finito. Lo dicho se cumplira
+
+. Costo simplificado : Sea el costo de la funcion especifico, para el caso dado. Notacion O de n. Es una expresion mas simple, que es mayor o igual que la expresion completa. para un n lo suficientemente grande
+
+2. Clasifica cada una de las siguientes complejidades con su nombre (constante, logarı́tmica, lineal,
+cuadrática, o exponencial): O(1), O(log n), O(n), O(n2 ), O(2n ).
+
+constante 1 
+logaritmica log n
+lineal n
+cuadratica n2 
+exponencial 2n
+
+3.
+Determina la complejidad, en función de n, del siguiente fragmento:
+1 for i ← 1 to n do
+2
+3
+for j ← i to n do
+imprimir(i, j) ;
+Justifica contando exactamente cuántas veces se ejecuta imprimir.
+
+imprimir se repite 
+
+n(n+1)/2
+
+esto se debe a la sumatoria
+
+
+en el bucle interior. j comeinza como i y luego avanza hasta n. por lo tanto el numero de repeticiones del bucle interior por cada repeticion exterior. esta relacionado a i - n. de donde sale el + 1
+
+sale del principio de contar inclusivamente. incluso si i es igual a n. igual eso se ejecutara. a pesar que i menos n es 0
+
+
+Click the link to view the conversation with Kimi https://www.kimi.ai/share/1a0e98ba-b922-8bc8-8000-00002dab7f38
+
+
+la complejidad es n al cuadrado
+
+
+
+4.
+Determina la complejidad, en función de n, del siguiente fragmento:
+1 for i ← 1 to n do
+2
+3
+for j ← 1 to ⌊n/i⌋ do
+imprimir(i, j) ;
+Un compañero dice: “el ciclo interior corre hasta n/i, ası́ que en el peor caso (i = 1) corre hasta
+n veces, y como eso pasa dentro de un ciclo que también corre n veces, la complejidad total es
+O(n2 ).” ¿Está en lo correcto? Justifica sumando el costo real de las n iteraciones del ciclo exterior
+(no el costo de la peor iteración multiplicado por n). Ayuda: 1 + 12 + 31 + · · · + n1 ≈ ln n.
+
+
+
+la complejidad es n por logn
+
+5. ¿Cuál es la complejidad de acceder al elemento en la posición i de un arreglo? ¿Y la de insertar
+un elemento al inicio de un arreglo con n elementos, si hay que desplazar todo lo demás una
+posición?
+
+constante y lineal respectivamente
