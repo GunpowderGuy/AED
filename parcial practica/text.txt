@@ -29,3 +29,102 @@ nes en el medio de la lista en O(1), si se tiene acceso directo al nodo.
 usario : falso
 6:
 colisiones y eso
+
+
+7. (0.5 pts) Quiere almacenar 1 MB de datos no comparables y espera ejecutar la ope-
+ración de búsqueda con mucha frecuencia. Un árbol búsqueda binaria balanceado
+es la estructura de datos más apropiada para resolver el problema anterior.
+
+problema anterior se puede referir al problema 6. la falla que notamos los hash pueden tener en el problema 6. O se puede referir al problema explicado en este mismo problema
+
+
+
+7. (0.5 pts) Quiere almacenar 1 MB de datos no comparables y espera ejecutar la ope-
+ración de búsqueda con mucha frecuencia. Un árbol búsqueda binaria balanceado
+es la estructura de datos más apropiada para resolver el problema anterior.
+
+problema anterior se puede referir al problema 6. la falla que notamos los hash pueden tener en el problema 6. O se puede referir al problema explicado en este mismo problema
+
+asumamos que se refiere al mismo problema ( 7 )
+
+en ese caso. yo diria que es una pregunta muy subjetiva. lo que la pregunta podria pedir decir es que como los datos no son comparables. entonces hash es mas natural, ya que bst requiere comparacion y hash no.
+
+Sin embargo los bst no necesitan una comparacion del tipo en si. puedes tomar el valor, transformarlo a algo correlacionado que si tiene comparacion, y usar eso como indexamiento ( por ejemplo sacar hash del elemento y usar eso como indice )
+
+ya no tendrias la capacidad que los elementos tenga un orden relevante ( orden del indexamiento correlacionado puede no tener significado ) .
+ ( este es la razon por la que  el examen espere que responda falso )
+
+Pero yo respondere verdadero
+ los bst tienen muchos otras ventajas. Puedes usarlo como estructura persistente. no necesita redimensionamiento stop the world ( los arboles son actualizados constantemente ) , los hash map tiene en la mayoria de casos un costo de indexamiento cercano a constante. pero en algunos casos el costo puede ser lineal. en bst balanceado, el costo logaritmico esta balanceado
+y hay muchas otras ventajas
+
+
+
+8. (0.5 pts) Si el factor de carga de una tabla hash es menor que 1, entonces no hay
+colisiones.
+
+
+dejame entender
+
+si el factor es mayor que 1, entonces colision esta garantizada
+
+si el factor es menor que 1. puede o no haber colision
+
+
+
+3. (6 points) Árboles
+(a) (2 pts) A continuación se muestra un árbol AVL. Realice la operación delete(8) y
+dibuje el árbol después de cada operación de rotación realizada durante la operación.
+Solución:
+
+(no vendra en parcial)
+
+
+(b) (4 pts) Stormen, Ceiserson, Livest y Rein son cuatro académicos que escribieron un
+libro de texto muy popular en informática, conocido cariñosamente como SCLR.
+Acaban de encontrar k primeras ediciones en sus oficinas y quieren subastarlas en
+lı́nea para caridad. Cada postor en la subasta tiene un ID de postor único y entero y
+puede ofertar una cantidad entera positiva por una sola copia (pero puede aumentar
+o disminuir su oferta mientras la subasta esté activa). Describa una base de datos
+que admita las siguientes operaciones, suponiendo que n es la cantidad de postores
+en la base de datos en el momento de la operación. Para cada operación, indique
+su tiempo de ejecución en el peor de los casos. Cada operación tiene peso de 2 pts.
+nuevaOferta(d, b)
+actualizarOferta(d,b)
+Registrar un nuevo ID del postor d con oferta b en tiempo O(lg n)
+Actualizar la oferta del postor existente
+con ID d a la oferta b en tiempo O(logn)
+Solución:
+
+
+
+(b) (4 pts) Stormen, Ceiserson, Livest y Rein son cuatro académicos que escribieron un
+libro de texto muy popular en informática, conocido cariñosamente como SCLR.
+Acaban de encontrar k primeras ediciones en sus oficinas y quieren subastarlas en
+lı́nea para caridad. Cada postor en la subasta tiene un ID de postor único y entero y
+puede ofertar una cantidad entera positiva por una sola copia (pero puede aumentar
+o disminuir su oferta mientras la subasta esté activa). Describa una base de datos
+que admita las siguientes operaciones, suponiendo que n es la cantidad de postores
+en la base de datos en el momento de la operación. Para cada operación, indique
+su tiempo de ejecución en el peor de los casos. Cada operación tiene peso de 2 pts.
+nuevaOferta(d, b)
+actualizarOferta(d,b)
+Registrar un nuevo ID del postor d con oferta b en tiempo O(lg n)
+Actualizar la oferta del postor existente
+con ID d a la oferta b en tiempo O(logn)
+Solución:
+
+usuario : esto parece ser un trabajo para arbol binario de busqueda
+
+el ordenamiento del arbol sera por el monto de la oferta. actualizar una oferta de un usario consiste en retirar la oferta anterior y poner una nueva
+
+poner un nuevo usario es poner una oferta
+
+ambos son logaritmiscas si el arbol es balanceado
+
+
+CORECCION:
+
+Se necesita indexar por id eficientemente . por lo tanto . podria añadir un bst balanceado de id a oferta
+
+Pero ademas me he dado cuenta que no es necesario indexamiento eficientemente de oferta a id. ( puede estar implicito , pero no se pide)

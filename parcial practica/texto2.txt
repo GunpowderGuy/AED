@@ -1,0 +1,52 @@
+(0.5 pts) La búsqueda binaria en un arreglo ordenado es el peor de los casos O(n).
+
+falso es O(logaritmo de 2 (n))
+
+
+(0.5 pts) El número de colisiones en una tabla hash depende únicamente de la capacidad de la tabla y de la función hash.
+
+falso. el numero de colisiones si depende de los dos factores mencionados, pero tambien depende de
+
+-que tanto elementos hay en la tabla de hash
+-el valor de los elementos que se van a hashear
+
+y creo que eso es todo
+
+(0.5 pts) Una tabla hash garantiza un tiempo de búsqueda constante.
+
+FALSooooo. las tablas hash muy frequentemente tienen un cost de busqueda constante. Sin embargo, el tiempo de busqueda en casos muy degenerados, puede ser hasta lineal
+
+
+(0.5 pts) Si cada nodo en un árbol binario tiene 0 o 2 hijos, entonces la altura del árbol es Θ(lg n).
+creo que falso
+
+                    6
+             /            L
+            3               2
+          /      L
+         6       9
+        /   L
+      10   11
+
+este arbol es similar a degenerado a pesar de cumplir el requisito
+
+
+
+(0.5 pt) Un sistema operativo necesita programar cuándo ejecutar cada uno de los procesos actuales. Una pila es la estructura de datos más apropiada para resolver el problema anterior.
+
+esto es demasiado vago . es como decir
+
+"mi problema necesita una estructura. dime cual"
+
+pero no nos dijiste cual es tu problema
+
+
+
+(0.5 pt) Quiere almacenar 1 MB de datos no comparables y espera ejecutar la operación de búsqueda con mucha frecuencia. Un árbol búsqueda binaria balanceado es la estructura de datos más apropiada para resolver el problema anterior.
+
+arbol tiene muchas pero muchas ventajas sobre hash. Pero el problema no esta claro si las tomaria ventaja. Asi que hash en vez de arbol, ya que en promedio suele tener indexamiento mas rapido
+( nota que es posible forzar BST en elementos que no se pueden ordenar, por ejemplo , si hasheas el key y ordenas eso )
+
+
+(0.5 pt) Si el factor de carga de una tabla hash es menor que 1, entonces no hay colisiones.
+falso. colision esta garantizadda si el factor es mayor que 1. pero si es menor, puede o no haber colisioens

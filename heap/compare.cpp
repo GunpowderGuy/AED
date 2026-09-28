@@ -29,3 +29,23 @@ int main() {
           }
     return 0;
 }
+
+
+// Restaura la propiedad del heap hacia arriba desde la posicion i.
+// El elemento en v[i] "flota" hasta que su padre lo ordene correctamente.
+template<typename T, std::predicate<const T&, const T&> Compare>
+void subir(std::vector<T>& v, size_t i, const Compare comp) {
+    while (i > 0) {
+        size_t padre = (i - 1) / 2;
+        if (comp(v[padre], v[i])) break;  // ya ordenado respecto al padre
+        std::swap(v[padre], v[i]);
+        i = padre;
+    }
+}
+
+// Inserta x en el heap manteniendo la propiedad: O(log n)
+template<typename T, std::predicate<const T&, const T&> Compare>
+void insertar(std::vector<T>& v, const T& x, const Compare comp) {
+    v.push_back(x);
+    subir(v, v.size() - 1, comp);
+}
