@@ -77,3 +77,163 @@ un elemento al inicio de un arreglo con n elementos, si hay que desplazar todo l
 posición?
 
 constante y lineal respectivamente
+
+
+6. Nombra al menos una operación que un vector soporte directamente y que un arreglo (de
+tamaño fijo) no pueda soportar sin crear un arreglo nuevo.
+
+tal vez redimensionar o tal vez lo consideres una operacion behind the scenes
+
+7. Un vector que duplica su capacidad cada vez que se llena logra que push back sea O(1)
+amortizado. Si en cambio, cada vez que se llena, aumentáramos la capacidad en una cantidad fija
+(por ejemplo, +10 espacios) en vez de duplicarla, ¿cuál serı́a el costo amortizado de push back para
+n inserciones? Explica por qué duplicar sı́ funciona y sumar una constante fija no.
+
+
+8.
+ Considera la siguiente implementación de push back:
+Algorithm 1: Push Back(A, x)
+1 if A.tamaño = A.capacidad then
+2
+ crear un arreglo nuevo B de capacidad 2 · A.capacidad ;
+3
+ copiar los A.tamaño elementos de A a B ;
+4
+ A ← B ;
+5 A[A.tamaño] ← x ;
+6 A.tamaño ← A.tamaño + 1 ;
+Sumando el costo total de n llamadas a Push Back, desde un arreglo vacı́o de capacidad 1, y
+dividiéndolo entre n, demuestra que el costo amortizado es O(1). Ayuda: las copias ocurren cuando
+la capacidad pasa de 1 → 2 → 4 → 8 → · · · ; ¿cuánto suman en total todas las copias, sobre n
+inserciones?
+
+
+Lo dejare para despues
+
+
+
+Listas Enlazadas
+9. ¿Cuál es la complejidad de acceder al k-ésimo elemento de una lista enlazada simple? ¿Por qué
+no se puede hacer en O(1) como en un arreglo?
+
+en una lista simplemente enlaza. solo tiene acceso directo a un numero constante de elementos ( usualmente solo el primero. a veces el ultimo )
+para llegar a todos los demas , necesitas operar sobre el elemento inicial. y luego el que optbienes, y asi sucecisvamente.
+para llegar al k esimo. necesita hacer la operacion de hallar el siguiente k veces
+
+
+
+10. En una lista circular simple, si en vez de guardar los punteros head y tail guardas solo tail
+(el último nodo), explica por qué igual puedes acceder tanto al primer como al último elemento en
+O(1). Ayuda: ¿a qué nodo apunta tail.siguiente?
+
+En algunas convenciones de lista doblemente enlazada. el ultimo elemento .next apunta al primer elemento
+
+Entonces si tenemos el ultimo elemento hacemos la operacion .next solo una vez y llegamos al inicial. hallar el .next tiene costo constante. hacer una operacion con costo constante una sola vez. tiene costo constante
+
+
+
+
+11. ¿Cuál es la ventaja principal de una lista doblemente enlazada sobre una lista simple al
+momento de eliminar un nodo del cual ya tienes un puntero directo (sin necesidad de buscarlo
+desde la cabeza)? ¿Qué información extra necesita cada nodo, y cómo cambia la complejidad de la
+eliminación?
+
+una lista simplemente enlazada tiene un valor. tambien tiene un campo que se puede usar para llegar al siguiente elemento
+
+las listas doblemente enlazadas tienen lo anterior. Adicionalemnete tienen un campo que se puede usar para llegar al elemento anterior
+
+esta informacion extra es util cuando quieres eleminar un nodo que tienes acceso directo.
+por que a partir de ese nodo tienes acceso al elemento anterior ademas del siguiente elemento
+
+para eliminar el elemento y que la lista sea valida despues de eso. haz que elemento anterior apunte directamente al elemento siguiente
+
+la complejidad de esto es constante
+
+la complejidad eleminar un nodo en una lista simplemente enlazada es lineal.
+
+El peor caso para eliminar un nodo seria que sea el penultimo elemento. Tendrias que iterar por la lista del primer elemento hasta el antepenultimo ( este apunta al penultimo ) .
+Ya que necesitas modifcar el antepenultimo para que apunte al nodo siguiente que quieres eleminar
+
+
+espera estaba mal. si quieres eliminar el ultimo. tienes que iterar por la lista hasta el penultimo. esto es una iteracion mas. este es el peor caso
+
+
+
+
+12. Diseña un algoritmo para determinar si una lista enlazada simple tiene un ciclo (en vez de
+que el último nodo apunte a nulo, en algún punto un nodo apunta de vuelta a un nodo anterior
+2
+de la misma lista). Debes lograrlo en O(n) tiempo y O(1) espacio extra (sin usar un conjunto de
+nodos visitados). Ayuda: recorre la lista con dos punteros que avancen a distinta velocidad, uno de
+un nodo en un nodo y otro de dos en dos.
+
+comienza desde el nodo inicial. crea dos variables. uno que avanza un nodo por iteracion, la otra por dos.
+las iteraciones terminan cuando una de las dos variables llegue al final. O si en alguna iteracion las dos varaibles corresponden al mismo nodo
+
+
+Siempre que la lista no tenga ciclos. la variable rapida llegara al final primero. ademas las dos varibles nunca corresponderan al mismo nodo
+
+Siempre que la lista tenga un bucle. la variable lenta y la rapida llegaran a corresponder al mismo nodo en alguna iteracion
+
+
+
+Pilas, Colas y Colas Dobles
+13. ¿Por qué una pila (y no una cola) es la estructura natural para implementar la función
+“deshacer” (undo) de un editor de texto? ¿Qué principio de acceso (LIFO o FIFO) corresponde a
+la forma en que un usuario espera que funcione undo?
+
+una cola es una estructura que te permite poner elementos y quitar elementos. el eleemtno mas antiguo aun en la estrucutra es el proximo que sera eliminado ( principio first in first out )
+
+un stack tambien te permite poner y elminar elementos. el elemento menos antiguo aun en la estrucutra es el que sera retirado ( este es el principio last in first out )
+
+cuando quieres deshacer cambios. lo natural es que se deshaga el mas reciente. se espera el principio last in first out
+
+
+
+
+
+14. Ejecuta, en orden, sobre una pila vacı́a: push(3), push(7), pop(), push(9), push(2), pop().
+¿Qué elemento estaba en el tope (el que devolverı́a top()) justo antes de cada pop(), y qué queda
+finalmente en la pila (de tope a fondo)?
+
+el stack sera representado con el elemento mas reciente arriba
+
+3
+
+7
+3 ( justo antes primer pop. pop devolveria el top : 7 )
+
+3
+
+9
+3
+
+2 ( justo antes segundo pop. pop devolveria el top : 2 )
+9
+3
+
+9
+3
+
+
+
+
+16. Usando dos pilas, diseña un algoritmo para implementar una cola (enqueue/dequeue).
+Describe cómo funciona cada operación en términos de push, pop y top sobre las pilas, y explica
+por qué el costo amortizado de dequeue es O(1) a pesar de que, en un caso individual, podrı́a
+costar O(n).
+
+para implementar una cola con dos pilas es muy simple ( llameslas pila in y pila out )
+
+Las operaciones de una cola estandar son push. pop y peek ( tambien llamada ver al top)
+
+Para push. pusheamos el elemnto con la operacion push estandard de pila_in
+
+para peek y pop. Si la pila_out no esta vacia. Simplemente usamos la operacion peek y op de pila_out. Sin embargo si esta vacia
+primero transferimos todos los elementos de pila_in a pila_out de la siguiente manera :
+
+Mientra halla elemento en pila_in, popeamos un elemento y lo pusheamos a pila_out
+
+-Para este caso especifico , el costo es linear. ya que hay que procesar todos los elementos de la estructura de datos.
+Pero hablando sobre el costo de manera amortizada, es costo constante. Mientras mas elementos halla en la estructura, mas se deben transferir.
+Sin embargo, mientras mas elementos sean transferidos. Mas estaran en pila_out. Por lo tanto se podra hacer pop mas veces hasta la siguiente transferencia
