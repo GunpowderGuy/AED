@@ -237,3 +237,31 @@ Mientra halla elemento en pila_in, popeamos un elemento y lo pusheamos a pila_ou
 -Para este caso especifico , el costo es linear. ya que hay que procesar todos los elementos de la estructura de datos.
 Pero hablando sobre el costo de manera amortizada, es costo constante. Mientras mas elementos halla en la estructura, mas se deben transferir.
 Sin embargo, mientras mas elementos sean transferidos. Mas estaran en pila_out. Por lo tanto se podra hacer pop mas veces hasta la siguiente transferencia
+
+Diccionarios y Hashing
+17. ¿Qué es el factor de carga α de una tabla hash, y cómo se calcula a partir de la cantidad
+de elementos n y el tamaño de la tabla m?
+
+Una tabla hash. tiene m slots que almacenan elementos indexados por el hash de su key correspondiente.  El factor de carga es el numero de elementos
+en la tabla hash dividido por el tamanno de la tabla
+
+
+18. Usando el método de la división con m = 5, calcula h(12), h(7) y h(20). ¿Cuáles de estas tres
+claves colisionan entre sı́?
+
+el metodo de la division es una funcion hiper simplista de hasheo .  hash(key) = key mod m 
+
+donde mod es el residuo de dividir key sobre m
+
+hash(12) = 12 mod 5  = 2
+hash(7) = 7 mod 5  = 2
+hash(20) = 20 mod 5  = 0
+
+keys 12 y 7 colisionan entre si
+
+
+19. Tienes una tabla hash de tamaño m = 7 con encadenamiento, usando h(k) = k mód 7.
+Inserta las claves 10, 22, 31, 4, 15 en ese orden, mostrando el contenido completo de cada bucket al
+final. ¿Cuál es el factor de carga α resultante?
+
+
