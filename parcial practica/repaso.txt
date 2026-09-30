@@ -264,4 +264,88 @@ keys 12 y 7 colisionan entre si
 Inserta las claves 10, 22, 31, 4, 15 en ese orden, mostrando el contenido completo de cada bucket al
 final. ¿Cuál es el factor de carga α resultante?
 
+hash(10) = 10 mod 7 = 3
+hash(22) = 22 mod 7  = 1
+hash(31) = 31 mod 7  = 3
+hash(4) = 4 mod 7  = 4
+hash(15) = 15 mod 7  = 1
 
+
+[ 22 y 15 , nada , 10 y 31 , 4 , nada , nada , nada ]
+
+
+el factor de carga es ( 5 / 7 )
+
+
+
+
+20. Explica la diferencia entre resolver colisiones por encadenamiento y por direccionamiento
+abierto: ¿qué ocurre fı́sicamente en la tabla cuando dos claves colisionan, en cada caso? ¿Por qué
+con encadenamiento el factor de carga α puede ser mayor que 1, y con direccionamiento abierto no?
+
+en resolver colisiones por encadenamiento, todas los valores con keys cuyo hash es el mismo, van a la misma casilla. en redireccionamiento, solo un valor va a la casilla que le toca naturalmente por hasheo. si existe otro mas, entonces  :
+
+ocurrira algo feo ( por esto solo usen chaining amigos ) . tendras que poner los siguientes elementos con el mismo key en otra casilla. lo que puede tener efectos domino. ya que otros elementos no estaran en su casilla natural tampoco
+
+factor de carga : numero de elementos / numero casillas
+
+el factor de carga no puede ser mayor que 1 con redireccionameinto. ya que solo hay un elemento por casilla. condicion que no existe con chaining
+
+
+
+21. Con el método de la división, h(k) = k mód m, ¿por qué se recomienda que m sea un número
+primo y no, por ejemplo, una potencia de 2? Da un ejemplo concreto de un conjunto de claves que
+colisionarı́a mucho más si m fuera una potencia de 2.
+
+tiene algo que ver con que los primos no tiene factores divisores mas que sigo mismo y uno. pero no se como explicarlo
+
+
+
+ARBOL
+
+22. Si insertas las claves 1, 2, 3, 4, 5 en ese orden en un BST vacı́o (sin ningún balanceo), ¿qué
+forma tiene el árbol resultante? ¿Cuál es su altura, y qué le pasa a la complejidad de Buscar en el
+peor caso comparado con un árbol bien balanceado de los mismos 5 elementos?
+
+
+1 -> 2 -> 3 -> 4 -> 5
+
+la altura sera de 4. el arbol resultante es el mostrado, equivalente a una lista.
+
+en estte caso donde el arbol es degenrado, la complejidad es lineal. cuando esta bien balanceado, la complejidad es logaritmica
+
+
+
+23. ¿Es cierto que todo árbol binario completo (todos los niveles llenos, salvo quizás el último,
+que se llena de izquierda a derecha) con n nodos tiene altura Θ(log n)? Justifica de forma intuitiva
+(no hace falta una demostración formal): piensa en cuántos nodos nuevos se agregan al aumentar
+la altura en uno.
+
+
+
+
+arbol degenerado : ya lo mencione
+arbol completo :  todos los niveles están completamente llenos, excepto posiblemente el último nivel, el cual se llena de izquierda a derecha
+arbol lleno : ningun nodo tiene un hijo . solo pueden tener 0 o el numero maximo ( 2 para binarios )
+arbol perfecto: todos los niveles estan completamente llenos
+              A
+            /   \
+           B     C
+          / \   / \
+         D   E F   G
+
+arbol balanceado : todos los niveles están completamente llenos, excepto posiblemente el último nivel. Esto
+es similar al arbol completo excepto que no es necesario que ultimo nivel este lleno de izquierda a derecha
+Ambos tipos de arboles ( si son binarios ) tiene altura log(n)
+
+
+correcion (ademas buscar lo de log(n) )
+
+A balanced tree is a tree data structure where the difference in height between the left and right subtrees of any node is kept to a small, constant limit (usually at most 1)
+
+23: es cierto  :
+
+logaritmo 2 (x) es igual al numero que debe exponenciar 2 para llegar a x.
+
+en un arbol binario. la estructura se divide en dos ( y el numero de elementos maximos se duplica ) mitades cada vez que se avanza un nivel.
+ en un arbol completo se usa eficientemente esta capacidad
