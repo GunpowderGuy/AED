@@ -349,3 +349,44 @@ logaritmo 2 (x) es igual al numero que debe exponenciar 2 para llegar a x.
 
 en un arbol binario. la estructura se divide en dos ( y el numero de elementos maximos se duplica ) mitades cada vez que se avanza un nivel.
  en un arbol completo se usa eficientemente esta capacidad
+
+
+
+24. Diseña Predecesor(x) para un nodo x de un BST (el nodo con el mayor valor estrictamente
+menor que el de x). Considera dos casos por separado: (a) x tiene subárbol izquierdo, y (b) x no
+tiene subárbol izquierdo. Da la complejidad de tu algoritmo en función de la altura h del árbol.
+
+cometi algunos errores con este problema  Click the link to view the conversation with Kimi https://www.kimi.ai/share/1a0f855c-0cb2-8f16-8000-0000bda10c9f
+
+a) x tiene subarbol izquierdo. comenzar con el hijo izquierdo de x. mientras este nodo tenga hijo derecho. retornar el hijo derecho. el resultado es el ultimo valor disponible
+
+b) x no tiene subarbol izquierdo. en este caso, comenzamos x como el nodo actual. encontramos el padre para nodo actual. si el nodo actual es hijo derecho  del padre, entonces retornamos este elemento. de lo contrario revisamos si el padre es la raiz, si lo es, entonces no hay elemento  menor que x
+de lo contrario. tomamos el padre como nodo actual y repetimos todo el proceso
+
+correcion de b :
+
+
+b) x no tiene subarbol izquierdo : En este caso, comenzamos x como el nodo actual. 
+comienzo proceso:
+Si el nodo actual no tiene padre ( dicho de otro modo , es raiz ) , entonces no existe valor menor que x en el bst.
+De lo contrario encontramos el padre para nodo_actual. Si el nodo actual es hijo derecho de su padre. entonces retornamos padre.
+De lo contrario, comenzamos el proceso desde el principio , pero con padre como nodo_actual
+
+
+ahora sobre el costo. no nos dicen si encontrar los padres tiene costo constante o no.
+
+hay arboles donde los padres apuntan a los hijos y no vice versa. hay otros donde los hijos si apuntan a los padres
+
+asumire que es el segundo costo sea en funcion altura del arbol
+
+entonces el costo en el caso a puede escribirse como
+
+o(altura_arbol - nivel_x )
+
+mientras que el costo del caso b como
+
+o(nivel_x ) 
+
+pero nos dijieron que el costo sea en funcion altura del arbol. asumire que se refiere exclusivamente en funcion de esto
+
+o(altura_arbol)
