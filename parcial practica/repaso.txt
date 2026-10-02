@@ -451,4 +451,67 @@ y este tambien
 
 
 
+28. En un heap 1-indexado de n = 10 elementos, ¿cuáles son los ı́ndices de las hojas (nodos sin
+hijos)? Da la fórmula general en función de n (a partir de la fórmula de izq(i)), y luego escribe los
+ı́ndices concretos para n = 10.
 
+
+Para un heap de 10 elementos , tipo
+
+{ 1, 2, 3, 4, 5, 6, 7, 8 , 9 , 10 }
+
+1 indexado significa que el primer elemento del heap es posicion 1 en vez de posicion 0
+
+ya vimos que para un heap 0 indexado. encontrar el padre un nodo es padre = (i - 1) / 2
+Para uno 1 indexado es padre = (i) / 2
+Donde i es el indice del hijo
+
+para hallar un hijo, la formula seria hijo_izquierdo = padre * 2 . dicho de otro modo. si existe un nodo con el indice doble de un padre. existe su hijo izquierdo
+
+entonces la formula general para saber si un nodo tiene hijo izquierdo ( el primer hijo ) es
+
+n >_ indice_padre * 2
+
+los indicies concretos asumire que significa los indices donde estan ubicadas las hojas
+
+{ 6, 7, 8 , 9 , 10 }
+
+estos son los elementos para las que la formula no se cumple
+
+
+
+
+
+
+
+
+
+
+29. Tienes el arreglo (1-indexado, max-heap) H = [3, 14, 9, 8, 7, 4, 2], donde los subárboles con
+raı́z en izq(1) = 2 y der(1) = 3 ya son max-heaps válidos, pero la raı́z podrı́a violar la propiedad
+de heap respecto a sus hijos. Ejecuta Sift-Down(H, 1, 7) en su versión para max-heap (la de clase
+es para min-heap: solo se invierten las comparaciones), mostrando el arreglo completo después de
+cada intercambio:
+
+
+
+              3    ( solo 3 no podria cumplir la propiedad max heap)
+            /   \
+           14     9
+          / \   / \
+         8   7 4   2
+
+
+
+              14
+            /   \
+           3     9
+          / \   / \
+         8   7 4   2
+
+
+             14
+            /   \
+           8     9
+          / \   / \
+         3   7 4   2
