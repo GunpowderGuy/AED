@@ -390,3 +390,65 @@ o(nivel_x )
 pero nos dijieron que el costo sea en funcion altura del arbol. asumire que se refiere exclusivamente en funcion de esto
 
 o(altura_arbol)
+
+
+
+25. Un árbol binario de búsqueda tiene recorrido Inorder 2, 5, 7, 9, 12, 15, 18 y recorrido Preorder
+9, 5, 2, 7, 15, 12, 18. Reconstruye el árbol completo (describe o dibuja su estructura), explicando el
+proceso que seguiste.
+
+revisar luego ( esto lo hiciste en la parte de asesoria que asististe del 30 septiembre. esta en leetcode y lo resumiste con kimi)
+
+
+Heaps
+26. Dado el arreglo (1-indexado) H = [1, 3, 6, 2, 9, 4], ¿es un min-heap válido? Si no lo es, identifica
+todas las posiciones que violan la propiedad de heap, indicando contra qué padre o hijo fallan.
+
+// codigo en carpeta Heap
+template<typename T, std::predicate<const T&, const T&> Compare>
+bool esHeapValido(const std::vector<T>& v, const Compare comp){
+    for (size_t i = 1; i < v.size(); ++i) {
+        size_t padre = (i - 1) / 2;
+        if (comp(v[i], v[padre])) return false;  // hijo "menor" que padre = violación
+    }
+    return true;
+}
+
+
+
+              1
+            /   \
+           3     6
+          / \   / \
+         2   9 4
+
+
+3 y 6 tienen hijos que no son mayores o iguales ( la propiedad de todos los hijos directos de un nodo, en un min heap ). Estos 2 y 4 respectivamente
+
+
+
+
+27. Explica por qué la propiedad de heap (padre ≥ hijo, en un max-heap) es una condición local y
+no garantiza un orden total entre todos los elementos: da un ejemplo concreto de dos hermanos (hijos
+del mismo padre) donde no se puede saber cuál de los dos es mayor sin compararlos directamente
+
+
+Este es un heap valido
+
+              1
+            /   \
+           3     6
+
+y este tambien
+
+
+              1
+            /   \
+            6     3
+
+ ambos heaps cumplen la condicion min heap. pero eso no te dice nada de su relacion, excepto con su padre. los hermanos
+ no tienen una relacion especificada entre si
+
+
+
+
