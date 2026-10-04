@@ -515,3 +515,34 @@ cada intercambio:
            8     9
           / \   / \
          3   7 4   2
+
+
+
+30. Construir-Heap (que aplica Sift-Down desde ⌊n/2⌋ hasta 1) es más eficiente, en total, que
+construir el mismo heap insertando los n elementos uno por uno con Insertar (que aplica Sift-Up
+a cada elemento nuevo). Sin repetir la demostración formal vista en clase, explica intuitivamente
+por qué la mayorı́a de las llamadas a Sift-Down dentro de Construir-Heap son baratas.
+
+
+insertar: cuando insertas en un heap vacio. el heap resultante siempre sera valido
+
+cuando insertas en un heap no vacio usas sift up para re validar el heap
+
+mientras el nodo tenga padre y viole la propiedad con él:
+    intercambiar con el padre
+    subir a la posición del padre
+
+El elemento sube por niveles hasta encontrar su lugar. El costo es proporcional a cuántos niveles sube: como parte del fondo, en el peor caso sube hasta la raíz → O(log n) por inserción, O(n log n) para insertar n elementos.
+
+
+Sift-Down (hundir)
+dfEs el que ya ejecutaste en el ejercicio 29. Se usa cuando un nodo de arriba puede violar la propiedad respecto a sus hijos (ej. tras extraer el máximo). El nodo se hunde: en cada paso se intercambia con su hijo más extremo (el mayor en max-heap), bajando un nivel por iteración. Costo: proporcional a cuántos niveles baja.
+
+
+Construir-Heap (Build-Heap)
+Tienes un arreglo cualquiero con los n elementos ya puestos. El truco: las posiciones ⌊n/2⌋+1 hasta n son hojas, y una hoja ya es trivialmente un heap válido (sin hijos que cuidar). Entonces:
+
+
+RESPUESTA
+
+La mayoria de elementos no son procesados, ya que son hojas. el proceso sift down en hoja es hacer nada. asi que se simplifica no procesandolos
