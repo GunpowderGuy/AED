@@ -1,0 +1,18 @@
+5 y 54 : red black tree
+
+propiedades de red black tree
+
+
+Red black tree es un arbol binario de busqueda. Ie: arbol donde cada nodo tiene 0, 1 o 2 hijos. Para cada nodo
+si tiene hijo izquierdo, su valor es menor. Si tiene hijo derecho, su valor es mayor
+
+ademas
+
+1 : Las hojas nulas son negras
+
+2 : La raiz es negra
+
+3 : Los nodos rojo tienen dos hijos negros
+
+4 : Para todo nodo x, la cantidad de nodos negros es la misma en
+cualquier camino de x a una hoja

@@ -1,0 +1,16 @@
+A binary search tree. is a tree where nodes can have 0, 1 or 2 children. with additionally the following condition
+
+all right children are greater than their parent. all left children are lower than their parent
+(note ,  dont assume this condition only holds for the root, it would be poor reading comprehension to assume that )
+
+Additionaly. whether duplicate keys are allowed is an open question. Some definitions of bst do, others dont.
+
+is this a perfect bst definition
+
+
+an AVL tree is a BST plus one single additional invariant, applied to every node:
+The balance condition
+
+    For every node: |height(left subtree) − height(right subtree)| ≤ 1
+
+where height is the number of nodes between the current node. and the furthest away leaf that is a child of the current node
