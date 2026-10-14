@@ -1,0 +1,41 @@
+12 octubre
+
+14 y 30 : llego profesor
+14 : 35 mensajes
+
+sudo snapper create --description "after update o"
+
+
+3 y 07 : secuencia de transciones no se sabe si vas a llegar al caso base
+
+factorial :: Int -> Int
+factorial 0 = 1
+factorial n = n * factorial (n-1)
+
+
+factorial :: Int -> Int
+factorial n = factorialAux n 1
+
+factorialAux :: Int -> Int -> Int
+factorialAux 0 acc = acc
+factorialAux n acc = factorialAux (n - 1) (n * acc)
+
+
+fibonacci :: Int -> Int
+fibonacci 0 = 0
+fibonacci 1 = 1
+fibonacci n = fibonacci (n - 1) + fibonacci (n - 2)
+
+
+3 y 16 arbol de recusion
+
+3 y 31 : por que euclides es tan importante
+
+
+13 octubre :
+
+11 y 13 : problema torres de Hanoi
+
+Recursion:
+
+f(n) = Minima cantidad de movs para trasladar n discos de de A a C con dos torres vacias
