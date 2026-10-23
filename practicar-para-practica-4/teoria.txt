@@ -1,5 +1,9 @@
 b)
 
+(b) Para cada funcion (con n >_ 1), dibuja o describe su árbol de recursion y di cuantas llamadas hace con n = 16 (contando la primera) y que orden de crecimiento tiene en funcion de n :
+
+    SUMAR(n): si n = 0 devuelve 0; si no, devuelve n + SUMAR(n − 1).
+
 sumar(16) : 
 
     sumar(16) 
