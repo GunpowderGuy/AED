@@ -45,3 +45,63 @@ el numero de llamadas es 17
 
 " que orden de crecimiento tiene en funcion de n:"
 crecimiento n
+
+
+MITAD(n): si n <_ 1 termina; si no, llama a MITAD(⌊n/2⌋).
+
+Mitad(16) - > Mitad(8) -> Mitad(4) -> Mitad(2)- > mitad(1)
+
+5 llamadas. numero de llamadas : sqrt(n) ( esta mal, correcion despues )
+
+DIVIDIR
+
+MITAD(256) → MITAD(128) → MITAD(64) → MITAD(32) → MITAD(16) → MITAD(8) → MITAD(4) → MITAD(2) → MITAD(1)
+
+en otros caso coincidia sqrt y log2() . variaba por muy poco , pero aqui nos damos cuenta 
+
+que solo log2(n) es valido 
+- orden de crecimiento es O(log2(n)
+
+
+
+DOBLE(n): si n <_ 1 termina; si no, llama dos veces a DOBLE(⌊n/2⌋)
+
+
+                                                         DOBLE(16)
+                                 /                                                                       \
+                         DOBLE(8)                                                                              DOBLE(8)
+                /                                    \                                                /                                  \  
+             DOBLE(4)                              DOBLE(4)                                      DOBLE(4)                            DOBLE(4)
+             /       \                              /      \                                     /      \                              /    \
+        DOBLE(2)        DOBLE(2)                 DOBLE(2)   DOBLE(2)                      DOBLE(2)      DOBLE(2)                DOBLE(2)       DOBLE(2) 
+        /    \              /         \         /        \           /     \               /  \          /    \                /     \      /      \
+    DOBLE(1) DOBLE(1)   DOBLE(1)  DOBLE(1)   DOBLE(1)  DOBLE(1)  DOBLE(1) DOBLE(1) DOBLE(1)  DOBLE(1) DOBLE(1) DOBLE(1) DOBLE(1) DOBLE(1) DOBLE(1) DOBLE(1)
+
+
+
+numero de llamadas es  : 1 + 2 + 4 + 8 +16 = 31
+
+
+                                                            DOBLE(17)
+                                 /                                                                       \
+                         DOBLE(8)                                                                              DOBLE(8)
+                /                                    \                                                /                                  \  
+             DOBLE(4)                              DOBLE(4)                                      DOBLE(4)                            DOBLE(4)
+             /       \                              /      \                                     /      \                              /    \
+        DOBLE(2)        DOBLE(2)                 DOBLE(2)   DOBLE(2)                      DOBLE(2)      DOBLE(2)                DOBLE(2)       DOBLE(2) 
+        /    \              /         \         /        \           /     \               /  \          /    \                /     \      /      \
+    DOBLE(1) DOBLE(1)   DOBLE(1)  DOBLE(1)   DOBLE(1)  DOBLE(1)  DOBLE(1) DOBLE(1) DOBLE(1)  DOBLE(1) DOBLE(1) DOBLE(1) DOBLE(1) DOBLE(1) DOBLE(1) DOBLE(1)
+
+
+numero de llamadas es  : 1 + 2 + 4 + 8 +16 = 31 ( mismo que el anterior ) 
+
+
+el numero de llamadas es : 2n - 1 
+
+
+
+2.pow(floor(log2(n))+1) -1
+
+es la formula correcta. la anterior falla para n que no es potencia de 2
+
+orden de crecimiento es o(n)

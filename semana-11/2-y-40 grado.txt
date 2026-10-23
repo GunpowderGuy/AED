@@ -1,0 +1,23 @@
+2 y 40
+grado 
+
+
+2 y 41 : handshake lemma 
+
+- > la suma de grados es par
+
+
+Un grafo de n vertices es conexo_ Cuantas aristas tiene , como minimo ?
+
+
+3 y 17 : un arbol es grafo conexo y aciclcico
+
+
+
+20 octubre
+
+matriz adyacencia ( 11 y 28 )
+
+con pesos : el 0 ya no sirve si
+
+
