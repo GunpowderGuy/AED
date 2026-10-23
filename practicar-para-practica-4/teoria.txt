@@ -1,0 +1,43 @@
+b)
+
+sumar(16) : 
+
+    sumar(16) 
+    /      \
+ 16    +   sumar(15)
+           /        \  
+         15   +   sumar(14)    
+                  /        \  
+                 14    +   sumar(13) 
+                          /        \  
+                        13    +  sumar(12) 
+                               /        \  
+                          12    +   sumar(11) 
+                                     /      \
+                                   11    +  sumar(10)
+                                             /     \
+                                            10  +  sumar(9)
+                                                    /    \
+                                                   9  +  sumar(8)
+                                                          /     \
+                                                          8  +  sumar(7)
+                                                                  /    \
+                                                                  7  + sumar(6)
+                                                                        /    \
+                                                                       6  +  sumar(5)
+                                                                              /    \
+                                                                              5 + sumar(4)
+                                                                                   /   \
+                                                                                  4  +  sumar(3)
+                                                                                         /     \
+                                                                                         3  + sumar(2)
+                                                                                               /    \
+                                                                                              2 +  sumar(1)
+                                                                                                    /    \
+                                                                                                   1  +  sumar(0)  
+
+
+el numero de llamadas es 17 
+
+" que orden de crecimiento tiene en funcion de n:"
+crecimiento n
