@@ -1,0 +1,355 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+using namespace::std;
+
+template<typename data_type>
+struct AVL {
+
+    struct TreeNode {
+        int height;
+        data_type data;
+        TreeNode* left;
+        TreeNode* right;
+
+        TreeNode(data_type data = data_type(), int height = 0,
+                    TreeNode* left = nullptr,
+                    TreeNode* right = nullptr) :
+                    data(data), height(height), left(left), right(right) {}
+    };
+
+    TreeNode* root;
+
+    AVL() {
+        root = nullptr;
+    }
+
+    void update(TreeNode* u) {
+        u -> height = 1 + max(h(u -> left) , h(u -> right));
+    }
+
+    int h(TreeNode* u) {
+        return u == nullptr ? -1 : u -> height;
+    }
+
+    int FB(TreeNode* u) {
+        return h(u -> left) - h(u -> right);
+    }
+
+    bool search(data_type key) {
+        TreeNode* current = root;
+        while (current != nullptr) {
+            if (current->data == key) {
+                return true;
+            }
+            if (current -> data > key) {
+                current = current -> left;
+            }
+            else {
+                current = current -> right;
+            }
+        }
+        return false;
+    }
+
+    TreeNode* min_element(TreeNode* u) {
+        if (u == nullptr) return nullptr;
+        TreeNode* current = u;
+        while (current -> left != nullptr) {
+            current = current -> left;
+        }
+        return current;
+    }
+
+    TreeNode* max_element(TreeNode* u) {
+        if (u == nullptr) return nullptr;
+        TreeNode* current = u;
+        while (current -> right != nullptr) {
+            current = current -> right;
+        }
+        return current;
+    }
+
+    TreeNode* min_element() {
+        return min_element(root);
+    }
+
+    TreeNode* max_element() {
+        return max_element(root);
+    }
+
+    TreeNode* rotate_left(TreeNode* u) {
+        TreeNode* v = u -> right;
+        u -> right = v -> left;
+        v -> left = u;
+        update(u);
+        update(v);
+        return v;
+    }
+
+    TreeNode* rotate_right(TreeNode* u) {
+        TreeNode* v = u -> left;
+        u -> left = v -> right;
+        v -> right = u;
+        update(u);
+        update(v);
+        return v;
+    }
+
+    TreeNode* rebalance(TreeNode* u) {
+        update(u);
+        if (FB(u) > 1) {
+            // L
+            if (FB(u -> left) < 0) {
+                // LR
+                u -> left = rotate_left(u -> left);
+            }
+            return rotate_right(u);
+        }
+        if (FB(u) < -1) {
+            // R
+            if (FB(u -> right) > 0) {
+                // RL
+                u -> right = rotate_right(u -> right);
+            }
+            return rotate_left(u);
+        }
+        return u;
+    }
+
+    TreeNode* insert(TreeNode* u, data_type value) {
+        if (u == nullptr) {
+            return new TreeNode(value, 0);
+        }
+        if (value < u -> data) {
+            u -> left = insert(u -> left, value);
+        }
+        else {
+            u -> right = insert(u -> right, value);
+        }
+        return rebalance(u);
+    }
+
+    void insert(data_type value) {
+        root = insert(root, value);
+    }
+
+    void print_inorder() {
+        print_subtree_inorder(root);
+        cout << endl;
+    }
+
+    void print_subtree_inorder(TreeNode* u) {
+        if (u == nullptr) return;
+        print_subtree_inorder(u -> left);
+        cout << u -> data << " ";
+        print_subtree_inorder(u -> right);
+    }
+
+    void print_preorder() {
+        print_subtree_preorder(root);
+        cout << endl;
+    }
+
+    void print_subtree_preorder(TreeNode* u) {
+        if (u == nullptr) return;
+        cout << u -> data << " ";
+        print_subtree_preorder(u -> left);
+        print_subtree_preorder(u -> right);
+    }
+
+    void print_postorder() {
+        print_subtree_postorder(root);
+        cout << endl;
+    }
+
+    void print_subtree_postorder(TreeNode* u) {
+        if (u == nullptr) return;
+        print_subtree_postorder(u -> left);
+        print_subtree_postorder(u -> right);
+        cout << u -> data << " ";
+    }
+
+    TreeNode* successor(TreeNode* x) {
+        if (x -> right != nullptr) {
+            return min_element(x -> right);
+        }
+        TreeNode* y = x -> parent;
+        while (y != nullptr and y -> right == x) {
+            x = y;
+            y = y -> parent;
+        }
+        return y;
+    }
+
+    TreeNode* predecessor(TreeNode* x) {
+        if (x -> left != nullptr) {
+            return max_element(x -> left);
+        }
+        TreeNode* y = x -> parent;
+        while (y != nullptr and y -> left == x) {
+            x = y;
+            y = y -> parent;
+        }
+        return y;
+    }
+
+    TreeNode* transplant(TreeNode* u, TreeNode* v) {
+        if (u -> parent == nullptr) {
+            root = v;
+        }
+        else if (u -> parent -> right == u) {
+            u -> parent -> right = v;
+        }
+        else {
+            u -> parent -> left = v;
+        }
+        if (v != nullptr) {
+            v -> parent = u -> parent;
+        }
+        delete u;
+    }
+
+    TreeNode* erase(TreeNode* u, const data_type& value) {
+        if (u == nullptr) return nullptr;
+
+        if (value < u -> data) {
+            u -> left = erase(u -> left, value);
+        }
+        else if (u -> data < value) {
+            u -> right = erase(u -> right, value);
+        }
+        else {
+            if (u -> left == nullptr or u -> right == nullptr) {
+                TreeNode* child = (u -> left != nullptr) ? u -> left : u -> right;
+                delete u;
+                return child;
+            }
+            TreeNode* succ = min_element(u -> right);
+            u -> data = succ -> data;
+            u -> right = erase(u -> right, succ -> data);
+        }
+        return rebalance(u);
+    }
+
+    void erase(data_type value) { // diego
+        root = erase(root, value);
+    }
+
+        bool empty() const {
+        return root == nullptr;
+    }
+
+    optional<data_type> pop_min() { // diego 
+        TreeNode* m = min_element(root);
+        if (m == nullptr) return nullopt;
+        data_type p = m -> data;
+        erase(p);
+        return p;
+    }
+
+    optional<data_type> pop_max() { // diego
+        TreeNode* m = max_element(root);
+        if (m == nullptr) return nullopt;
+        data_type p = m -> data;
+        erase(p);
+        return p;
+    }
+
+    AVL(const AVL&) = delete; // copiar esta buggeado , Diego 
+    AVL& operator=(const AVL&) = delete;// copiar esta buggeado , Diego 
+
+ 
+};
+
+// ESTADO DEL ARCHIVO
+// ------------------
+// Operativo: insert (con duplicados), erase (borra una instancia),
+//            search, min_element, max_element, empty, pop_min, pop_max.
+//
+// ROTO: successor, predecessor y transplant usan x->parent, que NO
+//       existe en TreeNode. No compilan si se instancian (sobreviven
+//       solo porque el template no instancia miembros no usados).
+//       No llamarlos: borrarlos o reescribirlos con puntero a padre.
+//
+// FUGA: no hay destructor; los nodos no se liberan. Irrelevante en
+//       un main de competencia; en uso real agregar ~AVL() + clear().
+//
+// COPIA: prohibida (= delete). Copiar compartia el arbol entre
+//        objetos (use-after-free). Si algun dia hace falta copiar,
+//        implementar ctor de copia con clone() recursivo.
+
+
+
+
+#include <cstddef>
+#include <iostream>
+
+using namespace std;
+
+// Limite del enunciado: 0 <= x <= 200000.
+constexpr size_t MAX_X = 200000;
+
+// Registro de camisetas: conteo de jugadores por numero, mas el conjunto
+// de numeros actualmente libres (0..MAX_X).
+class RegistroCamisetas {
+public:
+    RegistroCamisetas() : conteo_(MAX_X + 1, 0) {
+        for (size_t x = 0; x <= MAX_X; ++x)
+            libres_.insert(x);
+    }
+
+    // Entra un jugador con la camiseta x.
+    void entra(size_t x) {
+        if (conteo_[x] == 0)
+            libres_.erase(x);
+        ++conteo_[x];
+    }
+
+    // Sale un jugador con la camiseta x (garantizado: habia al menos uno).
+    void sale(size_t x) {
+        --conteo_[x];
+        if (conteo_[x] == 0)
+            libres_.insert(x);
+    }
+
+    // Menor numero de camiseta que no esta en uso.
+    // Si todos los 0..MAX_X estan ocupados, la respuesta es MAX_X + 1
+    // (ese numero nunca se registra, asi que jamas desaparece del conjunto
+    // de libres: lo devolvemos como sentinela).
+    size_t menor_libre() {
+        if (libres_.empty())
+            return MAX_X + 1;
+        return libres_.min_element()->data;
+    }
+
+private:
+    vector<size_t> conteo_;
+    AVL<size_t> libres_;
+};
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    size_t q;
+    cin >> q;
+    RegistroCamisetas registro;
+    while (q--) {
+        size_t tipo;
+        cin >> tipo;
+        if (tipo == 1) {
+            size_t x;
+            cin >> x;
+            registro.entra(x);
+        } else if (tipo == 2) {
+            size_t x;
+            cin >> x;
+            registro.sale(x);
+        } else {
+            cout << registro.menor_libre() << '\n';
+        }
+    }
+    return 0;
+}

@@ -254,8 +254,29 @@ struct AVL {
         return p;
     }
 
+    AVL(const AVL&) = delete; // copiar esta buggeado , Diego 
+    AVL& operator=(const AVL&) = delete;// copiar esta buggeado , Diego 
+
  
 };
+
+// ESTADO DEL ARCHIVO
+// ------------------
+// Operativo: insert (con duplicados), erase (borra una instancia),
+//            search, min_element, max_element, empty, pop_min, pop_max.
+//
+// ROTO: successor, predecessor y transplant usan x->parent, que NO
+//       existe en TreeNode. No compilan si se instancian (sobreviven
+//       solo porque el template no instancia miembros no usados).
+//       No llamarlos: borrarlos o reescribirlos con puntero a padre.
+//
+// FUGA: no hay destructor; los nodos no se liberan. Irrelevante en
+//       un main de competencia; en uso real agregar ~AVL() + clear().
+//
+// COPIA: prohibida (= delete). Copiar compartia el arbol entre
+//        objetos (use-after-free). Si algun dia hace falta copiar,
+//        implementar ctor de copia con clone() recursivo.
+
 
 int main() {
     int n;
