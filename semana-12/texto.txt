@@ -1,0 +1,34 @@
+bfs y representacion de grafos . tambien vendran problemas representacion de bfs. de grafos vendra sencilla
+
+2 y 15
+
+2y 17 : hongo se reproduce
+todos los nodos son pacientes cero 
+
+nivel = la minima cantidad de aristas desde un nodo en nivel 0 . al nodo actual
+
+
+14 y 27: invariante que utilizaremos luego
+
+14 y 32 : Capas | ya sabemos que una cola nos ayudaria
+
+tambien puedes usar cola
+
+14 y 42 : el arb
+ol BFS
+
+14 y48: si solo me interesa un nivel , la complejidad cambia no cambia
+
+3 : que son componentes conexas
+
+3 y 04 : este codigo de busqueda en grid yo lo hice primer ciclo en python ( creo ) 
+
+3 y 08 grafo bipartito
+
+
+3 y 20 : lo que bfs no hace pesos
+
+cuando los pesos son una constante n, o 0. bfs igual funciona
+
+topological sort
+3 y3 2 : tanto tu como joze luis
