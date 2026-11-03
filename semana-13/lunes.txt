@@ -1,0 +1,17 @@
+la idea DFS : tiempos de entrada y salida y los tipos de arista que aparecen
+
+4 y 20 : estas flechas son informacion nueva
+
+
+4 y 27 : DFS es con stack. BFS es con cola
+
+4 y 35 :  esta es intuicion. ciclo  detectar
+
+
+4 y 51 : cada vertice es un intervalo
+
+puede una arista unir dos ramada distintas del arbol dfs
+
+3 y0 4 : otro aplicacion ya mencionads es ciclo. solo existe ciclo si hay backedge
+
+4 y 16 :  bfs y dfs . para que se usa cada uno

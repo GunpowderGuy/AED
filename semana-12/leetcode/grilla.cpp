@@ -91,6 +91,7 @@ std::optional<std::size_t> camino_mas_corto(Grid& grilla, const Position inicio,
     return std::nullopt;
 }
 
+int camino_mas_corto(
 
 #include <cstddef>
 #include <iostream>
