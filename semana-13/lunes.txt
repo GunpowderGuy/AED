@@ -15,3 +15,6 @@ puede una arista unir dos ramada distintas del arbol dfs
 3 y0 4 : otro aplicacion ya mencionads es ciclo. solo existe ciclo si hay backedge
 
 4 y 16 :  bfs y dfs . para que se usa cada uno
+
+
+

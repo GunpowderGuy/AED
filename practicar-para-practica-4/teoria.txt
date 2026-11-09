@@ -105,3 +105,133 @@ el numero de llamadas es : 2n - 1
 es la formula correcta. la anterior falla para n que no es potencia de 2
 
 orden de crecimiento es o(n)
+
+Problema 2: Árboles balanceados (AVL) — ¿Cuán alto puede ser un AVL? (4 puntos)
+Un AVL con n nodos puede ser más alto o más bajo según cómo se insertaron sus claves. (Aquí un árbol con un solo nodo tiene altura 0, y recuerda que en un AVL las alturas de los dos hijos de cualquier nodo difieren a lo más en 1.)
+(a) ¿Cuál es la menor cantidad de nodos que puede tener un AVL de altura 4? Dibuja uno con esa cantidad de nodos.
+(b) Con 20 nodos, ¿cuál es la mayor y cuál es la menor altura que puede tener un AVL? ¿Y un BST cualquiera? Explica cómo lo obtuviste.
+
+SOLUCION A: 
+
+En un AVL, las alturas de los dos hijos de cualquier nodo difieren a lo más en 1
+cuando un nodo no existe, su altura es considerada -1? ( parece que si ) 
+
+comenzemos con algo mas facil. el avl con mayor cantidad de nodos y altura 4
+
+
+                             1
+                    /                   \
+                   2                     3
+              /         \             /       \
+             4           5           6         7
+           /   \        /   \       /   \     /   \
+          8     9     10    11    12    13   14    15
+         / \   / \    / \   / \   / \   / \  / \   / \
+       16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+
+
+                              1
+                    /                   \
+                   2                     3
+              /         \             /       \
+             4           5           6         7
+           /   \        /   \       /   \     /   \
+          8     9     10    11    12    13   14    15
+         / \   / \    / \   / \   / \   / \  / \   / \
+       16 
+
+sigue siendo avl
+
+
+
+                              1
+                    /                   \
+                   2                     3
+              /         \             /       \
+             4           5           6         7
+           /   \        /   \       /   \     /   \
+          8          
+         / \   / \    / \   / \   / \   / \  / \   / \
+       16 
+
+
+esto ya deja de ser avl .debo encontrar como podar el arbol(para que tenga menos nodos)y que siga siendo avl
+
+                              1
+                    /                   \
+                   2                     3
+              /         \             /       \
+             4           5           6         7
+           /   \        /   \       /   \     /   \
+          8     9     10          12         14     
+         / \   / \    / \   / \   / \   / \  / \   / \
+       16                        
+
+Este si es valido. Pero podriamos podarlo y que siga teniendo altura 4s
+
+ 
+                             1
+                    /                   \
+                   2                     3
+              /         \             /       \
+             4           5           6         7
+           /   \        /   \       /   \     /   \
+          8     9     10          12              
+         / \   / \    / \   / \   / \   / \  / \   / \
+       16                        
+
+este sigue siendo avl y ademas es el minimo . con 12 nodos
+
+RESPUESTA : el AVL con altura 4, con menor numero de nodos, tiene 12 nodos
+
+
+B : con 20 nodos, la menor altura para un avl es 4
+
+
+                             1
+                    /                   \
+                   2                     3
+              /         \             /       \
+             4           5           6         7
+           /   \        /   \       /   \     /   \
+          8     9     10    11    12    13   14    15
+         / \   / \    / \   / \   / \   / \  / \   / \
+       16 17 18 19 20 
+
+ya que ese es el arbol binario mas compacto con 20 nodos
+
+
+y la mayor altura es x ..
+
+comenzemos con el arbol de mayor altura con 12 nodos
+
+
+                              1
+                    /                   \
+                   2                     3
+              /         \             /       \
+             4           5           6         7
+           /   \        /   \       /   \     /   \
+          8     9     10          11              
+         / \   / \    / \   / \   / \   / \  / \   / \
+       12
+
+
+ahora pongamosle mas nodos
+
+
+                             1
+                    /                   \
+                   2                     3
+              /         \             /       \
+             4           5           6         7
+           /   \        /   \       /   \     /   \
+          8     9     10    16     11   19   18        <- aqui falta un nodo  
+         / \   / \    / \   / \   / \   / \  / \   / \
+       12  13 14     17          20           <- aqui falta un nodo
+      /      
+     15    
+
+con 22 nodos seria posible altura 5. pero con 20 solo es posible altura 4 (avl ) 
+                        
+        
