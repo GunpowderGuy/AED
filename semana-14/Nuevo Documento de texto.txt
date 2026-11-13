@@ -1,0 +1,34 @@
+un poco antes 14 y 20  incio dijsktra
+
+bfs 01 se usa para lo que djstar pero con solo dos pesos
+
+podemos modificar bfs a bfs onc nodos especiales 
+
+
+|4 y 17 : que cractersitica en común tiene los nivels con el menor nodo que me innterese ?
+
+31 : como soposrtar anti nodos ? djstra no lo soporta por que esuna optimización de bfs con nodso pesciales. pero no puede haber anitidos sespeciales, solo nodos extra
+
+
+
+
+4 y 45 : 
+bfs usa una ocla, djstra usa una cola de priorida ( creo que se usa para solo iterar sobre los pares relevantes )
+
+
+pueden usar priory queue o heap  ( pensé que eran lo mismo , pero no ) 
+
+
+bfs es lineal, djstra es lorigmico creo ?
+
+4 y 50 : cuando un nodo sale del heap, ya estará comprobado que su peso menor a sido asignado. pero ante de eso puede que ya haya sido asignado 
+
+djstra toma un grafo y un origne. retornan el camino mas carto para llegar a cualquier punto desde el origen
+
+4 y 58 : si te olvidas d esta parte del algoritmo, tu código será cuadratico por esta razón
+
+5 y 02 : explicación de mi caso de por que dijstra no funciona con pesos negativos 
+
+5 y 08 : costo .  cuantas veces se puede ejecutar insertar . a lo mas una vez por arista, mas la inicial
+
+explicación por que  ( el resultado creo ,  es simple ) 

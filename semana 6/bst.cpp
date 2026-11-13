@@ -184,6 +184,25 @@ struct BST {
             else transplant(u, u -> right);
         }
     }
+
+
+     bool operator==(const BST& other) const {
+        return nodes_equal(root, other.root);
+    }
+
+    bool operator!=(const BST& other) const {
+        return not (*this == other);
+    }
+
+private:
+    bool nodes_equal(TreeNode* a, TreeNode* b) const {
+        if (a == nullptr and b == nullptr) return true;
+        if (a == nullptr or b == nullptr) return false;
+        return a->data == b->data
+           and nodes_equal(a->left, b->left)
+           and nodes_equal(a->right, b->right);
+    }
+
 };
 
 int main () {
@@ -198,5 +217,44 @@ int main () {
     B.print_preorder();
     B.print_inorder();
     B.print_postorder();
+    return 0;
+}
+
+
+int main () {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int n, m;
+    cin >> n >> m;
+
+    vector<BST<int>*> unicas;   // arboles distintos ya vistos, en orden de aparicion
+    vector<int> grupo(m);       // grupo de cada lista
+
+    for (int i = 0; i < m; ++i) {
+        BST<int>* B = new BST<int>();
+        for (int j = 0; j < n; ++j) {
+            int x;
+            cin >> x;
+            B->insert(x);
+        }
+        int g = 0;
+        for (size_t j = 0; j < unicas.size(); ++j) {
+            if (*B == *unicas[j]) {
+                g = j + 1;
+                break;
+            }
+        }
+        if (g == 0) {
+            unicas.push_back(B);
+            g = unicas.size();
+        }
+        grupo[i] = g;
+    }
+
+    cout << unicas.size() << "\n";
+    for (int i = 0; i < m; ++i) {
+        cout << grupo[i] << (i + 1 < m ? ' ' : '\n');
+    }
     return 0;
 }
