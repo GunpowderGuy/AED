@@ -1,6 +1,7 @@
 module Main
 
-import BFSPuro
+--import BFSPuro
+import BFS
 
 %default partial
 
@@ -9,4 +10,6 @@ g : List (List Nat)
 g = [[1,3], [0,2], [1,3], [2,0]]
 
 main : IO ()
-main = printLn (bfs g 0)   -- bfs es pura: sin <-, sin IO
+main = do
+  dist <- bfs g 0   -- versión IO (IOArray): hay que sacarla con <-
+  printLn dist

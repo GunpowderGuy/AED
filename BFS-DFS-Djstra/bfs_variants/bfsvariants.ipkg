@@ -1,0 +1,8 @@
+package bfsvariants
+
+version = 0.1.0
+sourcedir = "."
+depends = ref1
+
+main = Main
+executable = main
