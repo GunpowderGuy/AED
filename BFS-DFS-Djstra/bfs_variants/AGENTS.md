@@ -40,7 +40,10 @@ idris2 -p ref1 -p linear Main.idr -o main
 ## Convenciones
 
 - Comentarios en español.
-- Los `.idr` usan `%default partial` (el BFS con cola no es obviamente total).
+- Los `.idr` usan `%default total`. El bucle BFS se totaliza con fuel:
+  como cada nodo se encola ≤ 1 vez (marcar AL ENCOLAR), el fuel
+  `S (sum (map length adj))` acota los pasos y hace la recursión
+  estructural.
 - Invariante del BFS en este repo: marcar AL ENCOLAR.
 
 ## Verificación

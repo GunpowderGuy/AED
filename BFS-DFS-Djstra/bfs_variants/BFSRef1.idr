@@ -9,18 +9,19 @@ import Data.Linear.Token
 import Data.SortedMap
 import Cola
 
---%default partial
---%default total
+%default total
 
 enumerate : Nat -> List (List Nat) -> List (Nat, List Nat)
 enumerate i [] = []
 enumerate i (vs :: rest) = (i, vs) :: enumerate (i + 1) rest
 
 indices : Nat -> List Nat
-indices m = go 0
+indices m = go m 0
   where
-    go : Nat -> List Nat
-    go i = if i >= m then [] else i :: go (i + 1)
+    -- baja por el contador (estructural); antes: go (i+1), no estructural
+    go : Nat -> Nat -> List Nat
+    go Z     _ = []
+    go (S k) i = i :: go k (S i)
 
 -- Contagiar vecinos: marca AL ENCOLAR, con write1 in-place en dist y q.
 infect : (dist : Ref s (SortedMap Nat Nat)) -> (q : Ref s (Queue Nat))
@@ -36,10 +37,15 @@ infect dist q du (v :: vs) t =
               _  # t := write1 q (enqueue v dq) t
            in infect dist q du vs t
 
-loop : (g : SortedMap Nat (List Nat))
+||| Bucle con fuel: con el invariante marcar-AL-ENCOLAR cada nodo entra en
+||| la cola como mucho una vez, así que hay a lo sumo
+||| 1 + (entradas de adyacencia) pasos; ese fuel hace la recursión
+||| estructural (caso Z inalcanzable con la cota correcta).
+loop : Nat -> (g : SortedMap Nat (List Nat))
     -> (dist : Ref s (SortedMap Nat Nat))
     -> (q : Ref s (Queue Nat)) -> F1' s
-loop g dist q t =
+loop Z _ _ _ t = () # t   -- fuel agotado: inalcanzable con la cota correcta
+loop (S k) g dist q t =
   let dq # t := read1 q t
    in case dequeue dq of
         Nothing => () # t
@@ -48,16 +54,19 @@ loop g dist q t =
               d # t := read1 dist t
            in case (lookup u d, lookup u g) of
                 (Just du, Just vs) =>
-                  let _ # t := infect dist q du vs t in loop g dist q t
-                _ => loop g dist q t   -- inalcanzable: u salió de la cola
+                  let _ # t := infect dist q du vs t in loop k g dist q t
+                _ => loop k g dist q t   -- inalcanzable: u salió de la cola
 
 bfs1 : (g : SortedMap Nat (List Nat)) -> (n, origen : Nat) -> F1 s (List (Maybe Nat))
 bfs1 g n origen t =
   let dist # t := ref1 (insert origen 0 empty) t
       q    # t := ref1 (enqueue origen empty) t
-      _    # t := loop g dist q t
+      _    # t := loop fuel g dist q t
       d    # t := read1 dist t
    in map (\i => lookup i d) (indices n) # t
+  where
+    fuel : Nat
+    fuel = S (sum (map length (values g)))   -- cota segura de pasos (ver loop)
 
 export
 bfs : List (List Nat) -> Nat -> List (Maybe Nat)
