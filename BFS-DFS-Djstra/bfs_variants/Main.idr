@@ -3,6 +3,7 @@ module Main
 
 import BFSRef1
 import BFSFun
+import BFSST
 
 -- Ciclo 0-1-2-3-0
 g : List (List Nat)
@@ -12,3 +13,4 @@ main : IO ()
 main = do
   printLn (BFSRef1.bfs g 0)   -- mutación interna (ref1), interfaz pura
   printLn (BFSFun.bfs g 0)    -- completamente puro
+  printLn (BFSST.bfsST g 0)   -- Control.Monad.ST: refs + do + for_
