@@ -1,0 +1,26 @@
+2 y 19 problema de la conectividad
+
+2 y 23 con bfs en el peor de los casos puede rendir no tan bien
+
+representantes para representar grupos
+
+2 y 39 : hize pregunta si re etiquetamos el de menor tamanno
+
+3 : cuando importa DSU vs small to large
+
+podrias usar arbol en vez de re etiquetar
+
+3 Y14 ARBOL
+
+
+y 18 compresion de caminons
+
+inversa de ackerman
+
+
+24 : usar dsu puede usarse para detectar ciclo
+
+otros usos
+
+
+bfs y dfs vs small to large y DSU
