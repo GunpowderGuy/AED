@@ -42,6 +42,38 @@ idris2 -p ref1 -p linear Main.idr -o main
   idris2-0.8.0/ref1-0.7.0`). No tiene desinstalador oficial; si algo raro
   pasa con la resolución de paquetes, sospechar de ella primero.
 
+## Estructuras contiguas
+
+`List`, `Vect`, `SnocList`, `List1` son listas enlazadas: NO son
+contiguas (acceso por índice O(n)). Estructuras contiguas de verdad
+presentes en este entorno (verificadas en las fuentes instaladas):
+
+Estándar (vienen con el compilador, en prelude/base):
+- `Data.IOArray` (base): array mutable con bounds-check, get/set O(1),
+  pero solo en `IO` (`HasIO`). Lo más parecido a `vector<int>` de C++.
+- `Data.Buffer` (base): buffer mutable de bytes, INSEGURO (sin
+  bounds-check); solo `IO`.
+- `Data.Fuel` (base): `Dry | More (Lazy Fuel)`, `limit : Nat -> Fuel`.
+  No es un array: es fuel para totalizar (ver Convenciones).
+
+Paquetes (llegaron como dependencias transitivas de ref1 vía pack):
+- `MArray s n a` / `Array n a` (paquete `array`): array contiguo
+  mutable con el tamaño en el tipo, get/set O(1), en el mundo del token
+  lineal (`F1`, confinado con `run1`, como ref1). También
+  `Data.Buffer.Mutable` (bytes). Requiere `-p array`.
+- `MTArray` / `TArray` (paquete `darray`): igual, con índices tipados
+  por enum. Requiere `-p darray`.
+- `Data.DArray` (paquete `darray`): versión inmutable.
+- `Data.ByteString` / `ByteVect` (paquete `bytestring`): bytes
+  empaquetados, inmutables.
+
+Caveats:
+- NADA de lo anterior funciona dentro de `Control.Monad.ST`: ST solo
+  trae `STRef`.
+- El registro de pack tiene MÁS librerías con arrays (p. ej. paquetes de
+  grafos array-backed); la lista de arriba cubre solo lo instalado en
+  este entorno.
+
 ## Convenciones
 
 - Comentarios en español.
@@ -49,7 +81,8 @@ idris2 -p ref1 -p linear Main.idr -o main
   (`if`, `for`, `while`): nada de cuerpos implícitos sin llaves.
 - Los `.idr` usan `%default total`. El bucle BFS se totaliza con fuel:
   como cada nodo se encola ≤ 1 vez (marcar AL ENCOLAR), el fuel
-  `S (sum (map length adj))` acota los pasos. En `BFSRef1` el bucle es
+  `S (sum (map length adj))` acota los pasos (en `BFSST` esas aristas se
+  cuentan con un for: `cuentaAristas`). En `BFSRef1` el bucle es
   `forN` de ref1 (el `for` del README de ref1; el paso es no-op con
   cola vacía); en `BFSFun` (sin ref1) el fuel es un `Nat` y la
   recursión es estructural en él.

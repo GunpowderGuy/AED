@@ -5,12 +5,16 @@
 ||| cuerpo inline, como en C++: ningún bucle va en función aparte.
 ||| Interfaz pura, igual que las demás: bfsST : List (List Nat) -> Nat ->
 ||| List (Maybe Nat). Total con el mismo fuel: cada nodo se encola
-||| ≤ 1 vez (marcar AL ENCOLAR), así que S (sum (map length adj)) acota
-||| los pasos.
+||| ≤ 1 vez (marcar AL ENCOLAR), así que 1 + (número de aristas) acota
+||| los pasos. La versión vigente es única y todo-en-uno: el grafo entra
+||| como lista contigua (el vector<vector<int>> de C++, indexada con
+||| drop) y el fuel es una VARIABLE contada con un for, en el mismo
+||| procedimiento.
 module BFSST
 
 import Control.Monad.ST
 import Data.SortedMap
+import Data.List
 import Cola
 
 %default total
@@ -56,7 +60,20 @@ bfsST1 g fuel n origen = do
   d <- readSTRef dist
   pure (map (\i => lookup i d) (indices n)) -- imprimir dist por índice
 
+-- Cuenta las aristas (entradas de adyacencia) con un for, como en
+-- bfsFor.cpp: int aristas = 0; for (vs : g) { aristas += vs.size(); }
+cuentaAristas : List (List Nat) -> Nat
+cuentaAristas adj = runST $ do
+  r <- newSTRef Z
+  for_ adj $ \vs => modifySTRef r (+ length vs)
+  readSTRef r
+
+--export
+--bfsST : List (List Nat) -> Nat -> List (Maybe Nat)
+--bfsST adj origen =
+--  runST (bfsST1 (fromList (enumerate 0 adj)) (S (sum (map length adj))) (length adj) origen)
+
 export
 bfsST : List (List Nat) -> Nat -> List (Maybe Nat)
 bfsST adj origen =
-  runST (bfsST1 (fromList (enumerate 0 adj)) (S (sum (map length adj))) (length adj) origen)
+  runST (bfsST1 (fromList (enumerate 0 adj)) (S (cuentaAristas adj)) (length adj) origen)
